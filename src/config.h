@@ -1,0 +1,13 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+
+#define TOTAL_INTERUPTS 512
+#define KERNEL_CODE_SEL 0x8
+#define KERNEL_DATA_SEL 0x10
+
+#define HEAP_BLOCK_SIZE 4096
+#define HEAP_SIZE 1024*1024*100
+#define HEAP_TABLE_ADDR 0x00007E00
+#define HEAP_ADDR 0x01000000
+
+#endif
