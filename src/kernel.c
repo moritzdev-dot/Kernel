@@ -4,6 +4,9 @@
 #include "idt/idt.h"
 #include "memory/heap/kheap.h"
 #include "memory/paging/paging.h"
+#include "memory/disk/disk.h"
+#include "string/string.h"
+#include "fs/pparser.h"
 
 
 char WHITE = 15;
@@ -32,13 +35,6 @@ void init_terminal() {
   }
 }
 
-size_t strlen(const char* str) {
-  size_t i = 0;
-  for(;str[i] != '\0'; i++){
-  }
-  return i;
-}
-
 void terminal_put_char(int x, int y, char c, char colour) {
   video_mem[calculate_idx(x, y)] = make_char(c, colour);
 }
@@ -65,6 +61,10 @@ void print(char* str) {
 void kernel_main() {
   init_terminal();
   kheap_init();
+
+  
+  disk_search_and_init();
+
   idt_init();
 
   kernel_chunk = new_4gb(

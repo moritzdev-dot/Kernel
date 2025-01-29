@@ -7,7 +7,10 @@ FILES = ./build/kernel.asm.o \
 				./build/heap.o\
 				./build/kheap.o\
 				./build/paging.o\
-				./build/paging.asm.o
+				./build/paging.asm.o\
+				./build/string.o\
+				./build/disk.o\
+				./build/pparser.o
 
 INCLUDES = -I./src
 FLAGS = -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wno-unused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc
@@ -43,6 +46,8 @@ all: ./bin/boot.bin ./bin/kernel.bin
 
 ./build/memory.o: ./src/memory/memory.c
 	i686-elf-gcc $(INCLUDES) $(FLAGS) -std=gnu99 -c ./src/memory/memory.c -o ./build/memory.o
+./build/disk.o: ./src/memory/disk/disk.c
+	i686-elf-gcc $(INCLUDES) $(FLAGS) -std=gnu99 -c ./src/memory/disk/disk.c -o ./build/disk.o
 
 ./build/heap.o: ./src/memory/heap/heap.c
 	i686-elf-gcc $(INCLUDES) $(FLAGS) -std=gnu99 -c ./src/memory/heap/heap.c -o ./build/heap.o
@@ -54,6 +59,12 @@ all: ./bin/boot.bin ./bin/kernel.bin
 
 ./build/paging.o: ./src/memory/paging/paging.c
 	i686-elf-gcc $(INCLUDES) $(FLAGS) -std=gnu99 -c ./src/memory/paging/paging.c -o ./build/paging.o
+
+./build/string.o: ./src/string/string.c
+	i686-elf-gcc $(INCLUDES) $(FLAGS) -std=gnu99 -c ./src/string/string.c -o ./build/string.o
+
+./build/pparser.o: ./src/fs/pparser.c
+	i686-elf-gcc $(INCLUDES) $(FLAGS) -std=gnu99 -c ./src/fs/pparser.c -o ./build/pparser.o
 
 clean:
 	rm ./bin/*

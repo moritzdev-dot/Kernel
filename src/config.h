@@ -10,4 +10,7 @@
 #define HEAP_TABLE_ADDR 0x00007E00
 #define HEAP_ADDR 0x01000000
 
+#define SECTOR_SIZE 512
+#define MAX_PATH_LEN 256
+
 #endif
